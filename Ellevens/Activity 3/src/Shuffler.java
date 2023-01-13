@@ -80,6 +80,21 @@ public class Shuffler {
 			System.out.println();
 		}
 
+		System.out.println();
+
+		System.out.print("permutation: ");
+		System.out.println(arePermutations(values1, values2));
+
+		System.out.println();
+
+		int[] values3 = new int[VALUE_COUNT];
+
+		for (int i = 0; i < values3.length; i++) {
+			values3[i] = i - 3;
+		}
+
+		System.out.print("permutation: ");
+		System.out.println(arePermutations(values3, values2));
 	}
 
 
