@@ -75,9 +75,9 @@ public class Shuffler {
 
 		int k = 0;
 
-		for (int j = 0; j < 25; j++)
+		for (int j = 0; j < 26; j++)
 		{
-			shuffled[k] = 2;
+			shuffled[k] = values[j];
 			k += 2;
 		}
 
@@ -89,7 +89,14 @@ public class Shuffler {
 			k += 2;
 		}
 
+		System.out.println();
 		values = shuffled;
+
+		for (int i: values) {
+			System.out.print(i + " ");
+		}
+		System.out.println();
+
 	}
 
 	/**
