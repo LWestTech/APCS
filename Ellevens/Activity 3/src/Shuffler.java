@@ -7,12 +7,19 @@ public class Shuffler {
 	 * The number of consecutive shuffle steps to be performed in each call
 	 * to each sorting procedure.
 	 */
-	private static final int SHUFFLE_COUNT = 1;
+	private static final int SHUFFLE_COUNT = 8;
+
+	private static final int FLIP_COUNT = 8;
 
 	/**
 	 * The number of values to shuffle.
 	 */
 	private static final int VALUE_COUNT = 52;
+
+	enum CoinState
+	{
+		HEADS, TAILS
+	}
 
 	/**
 	 * Tests shuffling methods.
@@ -61,6 +68,18 @@ public class Shuffler {
 		}
 
 		System.out.println();
+
+		System.out.println("Results of " + FLIP_COUNT
+						  + " consecutive flips:");
+
+		CoinState coinState = CoinState.TAILS;
+		for (int j = 1; j <= FLIP_COUNT; j++) {
+			coinState = flip();
+			System.out.print("  " + j + ": " + coinState);
+			
+			System.out.println();
+		}
+
 	}
 
 
@@ -71,24 +90,23 @@ public class Shuffler {
 	 * @param values is an array of integers simulating cards to be shuffled.
 	 */
 	public static void perfectShuffle(int[] values) {
-		int[] shuffled = new int[VALUE_COUNT];
-		int k = 0;
+		int[] shuffled = new int[52];
 
-		for (int j = 0; j < 26; j++)
+		int k = 0;
+		for (int j = 0; j <= 25; j++)
 		{
 			shuffled[k] = values[j];
 			k += 2;
 		}
 
 		k = 1;
-
-		for (int j = 26; j < 52; j++)
+		for (int j = 26; j <= 51; j++)
 		{
 			shuffled[k] = values[j];
 			k += 2;
 		}
 
-		for (int i: values) {
+		for (int i = 0; i < 51; i++) {
 			values[i] = shuffled[i];
 		}
 	}
@@ -112,5 +130,36 @@ public class Shuffler {
 			values[r] = values[k];
 			values[k] = otherCard;
 		}
+	}
+
+	public static CoinState flip()
+	{
+		return (Math.random() > (double)1/3)? CoinState.HEADS : CoinState.TAILS;
+	}
+
+	public static boolean arePermutations(int[] inArray1, int[] inArray2)
+	{
+		boolean output = true;
+
+		for (int in1: inArray1)
+		{
+			boolean copyFound = false;
+			for (int in2: inArray2)
+			{
+				if (in1 == in2)
+				{
+					copyFound = true;
+					break;
+				}
+			}
+
+			if (!copyFound)
+			{
+				output = false;
+				break;
+			}
+		}		
+
+		return output;
 	}
 }
