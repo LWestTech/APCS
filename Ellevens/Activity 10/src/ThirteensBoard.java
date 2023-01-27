@@ -126,7 +126,7 @@ public class ThirteensBoard extends Board {
         boolean foundKing = false;
         for (Integer i : selectedCards)
         {
-            foundKing = cardAt(i).rank() == "king";
+            foundKing = cardAt(i).rank().equals("king");
         }
         return foundKing;
     }
