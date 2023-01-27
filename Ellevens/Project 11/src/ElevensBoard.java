@@ -49,9 +49,9 @@ public class ElevensBoard extends Board {
 	public boolean isLegal(List<Integer> selectedCards) {
 		/* *** TO BE MODIFIED IN ACTIVITY 11 *** */
 		if (selectedCards.size() == 2) {
-			return containsPairSum11(selectedCards);
+			return findPairSum11(selectedCards).size() == 2;
 		} else if (selectedCards.size() == 3) {
-			return containsJQK(selectedCards);
+			return findJQK(selectedCards).size() == 3;
 		} else {
 			return false;
 		}
@@ -69,7 +69,7 @@ public class ElevensBoard extends Board {
 	public boolean anotherPlayIsPossible() {
 		/* *** TO BE MODIFIED IN ACTIVITY 11 *** */
 		List<Integer> cIndexes = cardIndexes();
-		return findPairSum11(cIndexes).size() != 0 || findJQK(cIndexes).size() != 0;
+		return findPairSum11(cIndexes).size() == 2 || findJQK(cIndexes).size() == 3;
 	}
 
 	/**
@@ -111,8 +111,7 @@ public class ElevensBoard extends Board {
 		boolean foundJack = false;
 		boolean foundQueen = false;
 		boolean foundKing = false;
-		for (Integer kObj : selectedCards) {
-			int k = kObj.intValue();
+		for (Integer k : selectedCards) {
 			if (cardAt(k).rank().equals("jack")) {
 				foundJack = true;
 				foundCards.add(k);
@@ -138,7 +137,12 @@ public class ElevensBoard extends Board {
 	 */
 	public boolean playIfPossible() {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 11 *** */
-		return false; // REPLACE !
+		if (playPairSum11IfPossible()) {
+			return true;
+		} else if (playJQKIfPossible()) {
+			return true;
+		}
+		return false;
 	}
 
 	/**
@@ -149,7 +153,9 @@ public class ElevensBoard extends Board {
 	 */
 	private boolean playPairSum11IfPossible() {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 11 *** */
-		 return false; // REPLACE !
+		List<Integer> selectedCards = findPairSum11(cardIndexes());
+		replaceSelectedCards(selectedCards);
+		return selectedCards.size() == 2;
 	}
 
 	/**
@@ -160,6 +166,8 @@ public class ElevensBoard extends Board {
 	 */
 	private boolean playJQKIfPossible() {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 11 *** */
-		return false; // REPLACE !
+		List<Integer> selectedCards = findJQK(cardIndexes());
+		replaceSelectedCards(selectedCards);
+		return selectedCards.size() == 3;
 	}
 }
