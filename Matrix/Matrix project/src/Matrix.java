@@ -64,53 +64,16 @@ public class Matrix {
         return output;
     }
 
+    /*
+     * Calculates and returns the determinant
+     * @return determinant
+     */
     public int getDeterminant()
     {
         if (arr.length == arr[0].length)
         {
-            return calculateDeterminant(new Matrix(arr));
+            return MatrixMath.calculateDeterminant(new Matrix(arr));
         }
         throw new RuntimeException("Can\'t calculate determinant of a non-square 2d array");
-    }
-
-    public int calculateDeterminant(Matrix mtr)
-    {
-        if (mtr.getCols() == 2 && mtr.getRows() == 2)
-        {
-            
-            return mtr.get(0,0) * mtr.get(1,1) - mtr.get(1,0) * mtr.get(0,1);
-        }
-        else
-        {
-            System.out.println("Calculating determinant of");
-            System.out.println(mtr);
-            System.out.println("------");
-            int determinant = 0;
-            boolean minus = false;
-            int[] minors = new int[mtr.getCols()];
-            for (int c = 0; c < mtr.getCols(); c++)
-            {
-                Matrix subMtr = new Matrix(mtr.getNotAligned(c));
-                int subDet = calculateDeterminant(subMtr);
-                int scalar = mtr.get(0, c) * subDet;
-                System.out.println("- Submatrix of id-" + c + " (" + mtr.get(0,c) + "):");
-                System.out.println(subMtr);
-                System.out.println("- Determinant: " + subDet);
-                System.out.println("- Scalar: (" + mtr.get(0, c) + " x " + subDet + ") = " + scalar);
-                System.out.println("- Sign: " + ((minus)? "plus" : "minus"));
-                System.out.println();
-                minors[c] = scalar;
-            }
-
-            for (int i : minors) {
-                determinant += (minus)? -1 * i : i;
-                System.out.println("Det" + ((minus)? " - " : " + ") + i + " = " + determinant);
-                minus = !minus;
-            }
-            System.out.println();
-            System.out.println("Determinant: " + determinant);
-            System.out.println("------");
-            return determinant;
-        }     
     }
 }
