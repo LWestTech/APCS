@@ -1,5 +1,7 @@
-public class MatrixTester {
-    public static void main(String[] args) {
+public class MatrixTester
+{
+    public static void main(String[] args)
+    {
         Matrix mtr = new Matrix(new int[][]{{1,2,3}, {4,2,6}, {7,8,9}});
         System.out.println();
         System.out.println("Final determinant: " + mtr.getDeterminant());

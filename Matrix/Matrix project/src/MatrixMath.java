@@ -1,11 +1,13 @@
-public class MatrixMath {
-   public MatrixMath() {
+public class MatrixMath
+{
+    public MatrixMath()
+    {
 
-   }
+    }
 
-   /*
+    /*
      * Calculates the determinant of any matrix passed into the method
-     * @param matrix
+     * @param mtr matrix
      * @return determinant
      */
     public static int calculateDeterminant(Matrix mtr)
@@ -18,7 +20,7 @@ public class MatrixMath {
         // System.out.println("Calculating determinant of");
         // System.out.println(mtr);
         // System.out.println("------");
-        
+
         int[] minors = new int[mtr.getCols()];
 
         for (int c = 0; c < mtr.getCols(); c++)
