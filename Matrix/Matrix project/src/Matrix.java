@@ -152,17 +152,4 @@ public class Matrix
         // System.out.println(new Matrix(output));
         return output;
     }
-
-    /*
-     * Calculates and returns the determinant of the matrix using <code>MatrixMath.calculateDeterminant</code>
-     * @return determinant
-     */
-    public int getDeterminant()
-    {
-        if (arr.length == arr[0].length)
-        {
-            return MatrixMath.calculateDeterminant(new Matrix(arr));
-        }
-        throw new RuntimeException("Can\'t calculate determinant of a non-square 2d array");
-    }
 }

@@ -1,5 +1,9 @@
 import javax.naming.directory.InvalidAttributesException;
 
+enum Operation
+{
+    ADD, SUBTRACT, MULTIPLY
+}
 public class MatrixMath
 {
     /*
@@ -8,6 +12,7 @@ public class MatrixMath
      */
     private MatrixMath() {} // A handy little trick to prevent initialization of a class
 
+    
     /*
      * Calculates the determinant of any matrix passed into the method
      * @param mtr matrix
@@ -17,8 +22,7 @@ public class MatrixMath
     {
         if (mtr.getCols() != mtr.getRows())
         {
-            
-            throw new RuntimeException("Can\'t calculate determinant of a non-square 2d array");
+            throw new IllegalArgumentException("Can\'t calculate determinant of a non-square 2d array");
         }
 
         if (mtr.getCols() == 2 && mtr.getRows() == 2)
@@ -64,27 +68,63 @@ public class MatrixMath
         return determinant;   
     }
 
-    public static Matrix add(Matrix mtrA, Matrix mtrB)
+    public static Matrix calculate(Matrix mtrA, Matrix mtrB, Operation operation)
     {
         if (mtrA.getCols() != mtrB.getCols() || mtrA.getRows() != mtrB.getRows())
         {
-            trow new InvalidAttributesException("null");
+            throw new IllegalArgumentException("Can\'t add matrices of different sizes");
         }
-        Matrix output = new Matrix(0, 0)
+
+        int rows = mtrA.getRows();
+        int cols = mtrA.getCols();
+
+        Matrix output = new Matrix(rows, cols);
+
+        for (int r = 1; r < rows; r++)
+        {
+            for (int c = 0; c < cols; c++)
+            {
+                int cellA = mtrA.get(r, c);
+                int cellB = mtrB.get(r, c);
+
+                int newData = 0;
+                switch (operation)
+                {
+                    case ADD:
+                        newData = cellA + cellB;
+                        break;
+                    case SUBTRACT:
+                        newData = cellA - cellB;
+                        break;
+                    case MULTIPLY:
+                        newData = cellA * cellB;
+                        break;
+                }
+                
+                output.set(r, c, newData);
+            }
+        }
+
+        return output;
     }
 
-    // public static Matrix subtract(Matrix mtrA, Matrix mtrB)
-    // {
+    public static Matrix add(Matrix mtrA, Matrix mtrB)
+    {
+        
+    }
 
-    // }
+    public static Matrix subtract(Matrix mtrA, Matrix mtrB)
+    {
 
-    // public static Matrix multiply(Matrix mtrA, Matrix mtrB)
-    // {
+    }
 
-    // }
+    public static Matrix multiply(Matrix mtrA, Matrix mtrB)
+    {
 
-    // public static Matrix scalarMultiply(Matrix mtrA, int scalar)
-    // {
+    }
 
-    // }
+    public static Matrix scalarMultiply(Matrix mtrA, int scalar)
+    {
+
+    }
 }
