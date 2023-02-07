@@ -1,4 +1,5 @@
-public class Matrix {
+public class Matrix
+{
     private int[][] arr;
 
     /*
@@ -18,13 +19,17 @@ public class Matrix {
      * The matrix as a string
      * @return string representing this matrix
      */
-    public String toString() {
+    public String toString()
+    {
         String str = new String();
-        for (int r = 0; r < arr.length; r++) {
-            for (int c = 0; c < arr[0].length; c++) {
+        for (int r = 0; r < arr.length; r++)
+        {
+            for (int c = 0; c < arr[0].length; c++) 
+            {
                 str += arr[r][c] + " ";
             }
-            if (r+1 != arr.length) {
+            if (r+1 != arr.length)
+            {
                 str += "\n";
             }
         }
@@ -32,9 +37,35 @@ public class Matrix {
     }
 
     /*
+     * Checks to see if the contents of this and another matrix are identical
+     * @param mtr matrix to compair with
+     * @return if the two matrices match
+     */
+    public boolean equals(Matrix mtr)
+    {
+        if (mtr.getCols() == getCols() && mtr.getRows() == getRows())
+        {
+            boolean inequalityFound = false;
+            for (int r = 0; r < getRows(); r++)
+            {
+                for (int c = 0; c < getCols(); c++)
+                {
+                    if (get(r, c) != mtr.get(r, c))
+                    {
+                        inequalityFound = true;
+                    }
+                }
+            }
+            return !inequalityFound;
+        }
+        return false;
+    }
+
+    /*
      * Sets the value of any given cell in the matrix
      * @param row cell's row index
      * @param col cell's column index
+     * @param content new integer to be placed in the specified cell
      */
     public void set(int row, int col, int content) {arr[row][col] = content;}
     
