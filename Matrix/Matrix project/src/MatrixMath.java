@@ -1,9 +1,12 @@
+import javax.naming.directory.InvalidAttributesException;
+
 public class MatrixMath
 {
-    public MatrixMath()
-    {
-
-    }
+    /*
+     * Overides the <code>Object</code> class's constructor and makes it private. This prevents this
+     * class from ever being instantiated, allowing it to behave like a static class
+     */
+    private MatrixMath() {} // A handy little trick to prevent initialization of a class
 
     /*
      * Calculates the determinant of any matrix passed into the method
@@ -12,6 +15,12 @@ public class MatrixMath
      */
     public static int calculateDeterminant(Matrix mtr)
     {
+        if (mtr.getCols() != mtr.getRows())
+        {
+            
+            throw new RuntimeException("Can\'t calculate determinant of a non-square 2d array");
+        }
+
         if (mtr.getCols() == 2 && mtr.getRows() == 2)
         {
             return mtr.get(0,0) * mtr.get(1,1) - mtr.get(1,0) * mtr.get(0,1);
@@ -54,4 +63,28 @@ public class MatrixMath
         // System.out.println("------");
         return determinant;   
     }
+
+    public static Matrix add(Matrix mtrA, Matrix mtrB)
+    {
+        if (mtrA.getCols() != mtrB.getCols() || mtrA.getRows() != mtrB.getRows())
+        {
+            trow new InvalidAttributesException("null");
+        }
+        Matrix output = new Matrix(0, 0)
+    }
+
+    // public static Matrix subtract(Matrix mtrA, Matrix mtrB)
+    // {
+
+    // }
+
+    // public static Matrix multiply(Matrix mtrA, Matrix mtrB)
+    // {
+
+    // }
+
+    // public static Matrix scalarMultiply(Matrix mtrA, int scalar)
+    // {
+
+    // }
 }
