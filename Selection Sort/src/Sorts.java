@@ -15,16 +15,16 @@ public class Sorts
     public static final int SIZE = 50;          // Size of array to be sorted
     private static int[] values = new int[SIZE];  // Values to be sorted
     
-    private static void initValues()
     // Initializes the values array with random integers from 0 to 99
+    private static void initValues()
     {
         Random rand = new Random(560);
         for (int index = 0; index < SIZE; index++)
             values[index] = Math.abs(rand.nextInt()) % 100;
     }
     
-    public static boolean isSorted()
     // Determine whether the array values are sorted
+    public static boolean isSorted()
     {
         boolean wrong = false;
         for (int i = 1; i < values.length; i++)
@@ -37,14 +37,36 @@ public class Sorts
         return true;
     }
     
-    public static void swap(int index1, int index2)
-    // Swaps the integers at locations index1 and index2 of array values
-    // Precondition:  index1 and index2 are less than size
+    public static int minIndex(int startIndex, int endIndex)
     {
+        int least = startIndex;
+        for (int i = startIndex; i <= endIndex; i++)
+        {
+            if (values[i] < values[least]) {least = i;}
+        }
+        return least;
     }
     
-    public static void printValues()
+    // Swaps the integers at locations index1 and index2 of array values
+    // Precondition:  index1 and index2 are less than size
+    public static void swap(int index1, int index2)
+    {
+        int temp = values[index1];
+        values[index1] = values[index2];
+        values[index2] = temp;
+    }
+
+    public static void selectionSort()
+    {
+        for (int i = 0; i < values.length; i++)
+        {
+            swap(i, minIndex(i, values.length));
+        }
+    }
+    
+    
     // Prints all the values integers
+    public static void printValues()
     {
         int value;
         DecimalFormat fmt = new DecimalFormat("00");
@@ -60,8 +82,8 @@ public class Sorts
         System.out.println();
     }
     
-    public static void main(String[] args) throws IOException
     // Tests the other methods of the Sorts class
+    public static void main(String[] args) throws IOException
     {
         initValues();
         printValues();
