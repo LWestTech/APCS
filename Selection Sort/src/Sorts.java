@@ -29,7 +29,7 @@ public class Sorts
         boolean wrong = false;
         for (int i = 1; i < values.length; i++)
         {
-            if (values[i] <= values[i-1])
+            if (values[i] < values[i-1])
             {
                 return false;
             }
@@ -58,9 +58,9 @@ public class Sorts
 
     public static void selectionSort()
     {
-        for (int i = 0; i < values.length; i++)
+        for (int i = 0; i < values.length - 1; i++)
         {
-            swap(i, minIndex(i, values.length));
+            swap(i, minIndex(i, values.length-1));
         }
     }
     
@@ -89,7 +89,7 @@ public class Sorts
         printValues();
         System.out.println("values is sorted: " + isSorted());
         System.out.println();
-        /* Call your sorting routine here */
+        selectionSort();
         printValues();
         System.out.println("values is sorted: " + isSorted());
         System.out.println();
