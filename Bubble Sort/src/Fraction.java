@@ -39,7 +39,7 @@ public class Fraction implements Comparable<Fraction>
   **/
   public double getDecimalForm()
   {
-    return this.getNumerator() / this.getDenominator();
+    return (double)this.getNumerator() / (double)this.getDenominator();
   }
 
   /**
