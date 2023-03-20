@@ -30,6 +30,7 @@ public class Sorts
         for (int current : values)
         {
             if (prev > current) return false;
+            prev = current;
         }
 
         return true;
@@ -47,20 +48,30 @@ public class Sorts
     public static void merge(int leftFirst, int leftLast, int rightFirst, int rightLast)
     {
         if (rightLast - leftFirst <= 1) return;
-        int[] drawList = new int[rightLast - leftFirst + 1];
-        drawList = values.clone();
+
+        int leftCenter = leftFirst + div(leftLast - leftFirst + 1, 2);
+        int rightCenter = rightFirst + div(rightLast - rightFirst + 1, 2);
+        merge(leftFirst, leftCenter, leftCenter + 1, leftLast);
+        merge(rightFirst, rightCenter, rightCenter + 1, rightLast);
+
+        int[] drawList = values.clone();
         int leftPointer = leftFirst;
         int rightPointer = rightFirst;
         for (int i = leftFirst; i <= rightLast; i++)
         {
-            int a = drawList[leftPointer];
-            int b = drawList[rightPointer];
-            values[i] = (a > b)? b : a;
+            int a = 0;
+            int b = 0;
+            if (rightPointer <= rightLast) b = drawList[rightPointer];;
+            if (leftPointer <= leftLast) a = drawList[leftPointer];
             
-        }
-        while (leftPointer < leftLast || rightPointer < rightLast)
-        {
-            
+            if (a > b)
+            {
+                values[i] = b;
+                rightPointer++;
+            } else {
+                values[i] = a;
+                leftPointer++;
+            }
         }
     }
 
@@ -100,7 +111,7 @@ public class Sorts
         printValues();
         System.out.println("values is sorted: " + isSorted());
         System.out.println();
-        /* Call your sorting routine here */
+        mergeSort();
         printValues();
         System.out.println("values is sorted: " + isSorted());
         System.out.println();
