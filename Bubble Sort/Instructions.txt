@@ -1,5 +1,0 @@
-Implement the bubble sort algorithm with two methods in a new class called FractionBubbleSmith where Smith stands for your last name.
-
-Your bubble sort should sort an ArrayList of Fraction objects.
-
-When you have finished and fully tested your program, submit your tester class and your Fraction class through this Canvas assignment.
