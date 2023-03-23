@@ -45,6 +45,32 @@ public class Sorts
         values[index2] = temp;
     }
 
+    void quickSort(int from, int to)
+    {
+        if (from < to)
+        {
+            int p = split(from, to);
+            quickSort(from, p - 1);
+            quickSort(p + 1, to);
+        }
+    }
+
+    public static int split(int from, int to)
+    {
+        int pivot = from;
+        int indexFirst = from;
+        int indexLast = to;
+        while (indexFirst < indexLast)
+        {
+            indexFirst++;
+            while (indexFirst < SIZE && values[indexFirst] <= pivot) {indexFirst++;}
+            while (values[indexLast] > pivot) {indexLast--;}
+            if (indexFirst < indexLast) {swap(indexFirst, indexLast);}
+        }
+        swap(from, indexLast);
+        return indexLast;
+    }
+
     public static void merge(int leftFirst, int leftLast, int rightFirst, int rightLast)
     {
         int l = leftFirst;
