@@ -32,7 +32,6 @@ public class Sorts
             if (prev > current) return false;
             prev = current;
         }
-
         return true;
     }
     
