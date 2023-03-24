@@ -44,7 +44,7 @@ public class Sorts
         values[index2] = temp;
     }
 
-    void quickSort(int from, int to)
+    public static void quickSort(int from, int to)
     {
         if (from < to)
         {
@@ -56,82 +56,84 @@ public class Sorts
 
     public static int split(int from, int to)
     {
-        int pivot = from;
+        int pivot = values[from];
         int indexFirst = from;
         int indexLast = to;
         while (indexFirst < indexLast)
         {
             indexFirst++;
             while (indexFirst < SIZE && values[indexFirst] <= pivot) {indexFirst++;}
-            while (values[indexLast] > pivot) {indexLast--;}
+            while (values[indexLast] > pivot) {
+                indexLast--;
+            }
             if (indexFirst < indexLast) {swap(indexFirst, indexLast);}
         }
         swap(from, indexLast);
         return indexLast;
     }
 
-    public static void merge(int leftFirst, int leftLast, int rightFirst, int rightLast)
-    {
-        int l = leftFirst;
-        int r = rightFirst;
+    // public static void merge(int leftFirst, int leftLast, int rightFirst, int rightLast)
+    // {
+    //     int l = leftFirst;
+    //     int r = rightFirst;
 
-        if (rightLast - leftFirst <= 0) return;
-        if (rightLast - leftFirst == 1) 
-        {
-            if (values[rightLast] < values[leftFirst]) swap(rightLast, leftFirst);
-            return;
-        }
+    //     if (rightLast - leftFirst <= 0) return;
+    //     if (rightLast - leftFirst == 1) 
+    //     {
+    //         if (values[rightLast] < values[leftFirst]) swap(rightLast, leftFirst);
+    //         return;
+    //     }
 
-        int leftCenter = leftFirst + div(leftLast - leftFirst + 1, 2);
-        int rightCenter = rightFirst + div(rightLast - rightFirst + 1, 2);
-        merge(leftFirst, leftCenter, leftCenter + 1, leftLast);
-        merge(rightFirst, rightCenter, rightCenter + 1, rightLast);
+    //     int leftCenter = leftFirst + div(leftLast - leftFirst + 1, 2);
+    //     int rightCenter = rightFirst + div(rightLast - rightFirst + 1, 2);
+    //     merge(leftFirst, leftCenter, leftCenter + 1, leftLast);
+    //     merge(rightFirst, rightCenter, rightCenter + 1, rightLast);
 
-        int[] temp = new int[rightLast - leftFirst + 1];
-        for (int i = 0; i < temp.length; i++)
-        {
-            if (l <= leftLast && r <= rightLast)
-            {
-                if (values[l] > values[r])
-                {
-                    temp[i] = values[r];
-                    r++;
-                }
-                else
-                {
-                    temp[i] = values[l];
-                    l++;
-                }
-            }
-            else if (l > leftLast)
-            {
-                temp[i] = values[r];
-                r++;
-            }
-            else if (r > rightLast)
-            {
-                temp[i] = values[l];
-                l++;
-            }
-        }
+    //     int[] temp = new int[rightLast - leftFirst + 1];
+    //     for (int i = 0; i < temp.length; i++)
+    //     {
+    //         if (l <= leftLast && r <= rightLast)
+    //         {
+    //             if (values[l] > values[r])
+    //             {
+    //                 temp[i] = values[r];
+    //                 r++;
+    //             }
+    //             else
+    //             {
+    //                 temp[i] = values[l];
+    //                 l++;
+    //             }
+    //         }
+    //         else if (l > leftLast)
+    //         {
+    //             temp[i] = values[r];
+    //             r++;
+    //         }
+    //         else if (r > rightLast)
+    //         {
+    //             temp[i] = values[l];
+    //             l++;
+    //         }
+    //     }
 
-        for (int i = 0; i < temp.length; i++)
-        {
-            values[i + leftFirst] = temp[i];
-        }
-    }
+    //     for (int i = 0; i < temp.length; i++)
+    //     {
+    //         values[i + leftFirst] = temp[i];
+    //     }
+    // }
 
-    public static int div(int a, int b)
-    {
-        double decimalForm = a / b;
-        return (int)(decimalForm + 0.5);
-    }
+    // public static int div(int a, int b)
+    // {
+    //     double decimalForm = a / b;
+    //     return (int)(decimalForm + 0.5);
+    // }
 
-    public static void mergeSort()
-    {
-        int split = div(SIZE, 2);
-        merge(0, split, split + 1, SIZE - 1);
-    }
+    // public static void mergeSort()
+    // {
+    //     int split = div(SIZE, 2);
+    //     merge(0, split, split + 1, SIZE - 1);
+    // }
     
     public static void printValues()
     // Prints all the values integers
@@ -157,7 +159,7 @@ public class Sorts
         printValues();
         System.out.println("values is sorted: " + isSorted());
         System.out.println();
-        mergeSort();
+        quickSort(0, SIZE - 1);
         printValues();
         System.out.println("values is sorted: " + isSorted());
         System.out.println();
