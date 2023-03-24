@@ -1,37 +1,49 @@
-public class QuickSort
-{
-    public static void quickSort(int from, int to)
-    {
-        if (from < to)
-        {
-            int p = split(from, to);
-            quickSort(from, p - 1);
-            quickSort(p + 1, to);
-        }
-    }
+import java.io.*;
+import java.util.*;
+import java.text.DecimalFormat;
 
-    private static int split(int from, int to)
+public class Sorts
+{
+    
+    public static boolean isSorted()
+    // Determine whether the array values are sorted
     {
-        int pivot = values[from];
-        int first = from;
-        int last = to;
-        while (first < last)
+        for (int i = 1; i < SIZE; i++)
         {
-            first++;
-            while (first < SIZE && values[first] <= pivot)
+            if (values[i] < values[i - 1])
             {
-                first++;
-            }
-            while (values[last] > pivot)
-            {
-                last--;
-            }
-            if (first < last)
-            {
-                swap(first, last);
+                return false;
             }
         }
-        Swaps.swap(from, last);
-        return last;
-    } 
+        return true;
+    }
+    
+    public static void swap(int index1, int index2)
+    // Swaps the integers at locations index1 and index2 of array values
+    // Precondition: index1 and index2 are less than size
+    {
+        int store = values[index1];
+        values[index1] = values[index2];
+        values[index2] = store;
+    }
+    public static void printValues()
+    // Prints all the values integers
+    {
+        int value;
+        DecimalFormat fmt = new DecimalFormat("00");
+        System.out.println("the values array is:");
+        for (int index = 0; index < SIZE; index++)
+        {
+            value = values[index];
+            if (((index + 1) % 10) == 0)
+            {
+            System.out.println(fmt.format(value));
+            }
+            else
+            {
+            System.out.print(fmt.format(value) + " ");
+            }
+        }
+        System.out.println();
+    }
 }   
