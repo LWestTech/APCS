@@ -17,7 +17,10 @@ public class Cocktail extends Sorts
 
             for (int i = startInd; i < endInd - 1; i++)
             {
-                if (getVali(i) > getVali
+                if (getVali(i) > getVali(i + 1)
+                {
+                    
+                }
             }
         }
 

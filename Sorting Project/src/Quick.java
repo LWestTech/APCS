@@ -1,6 +1,11 @@
 public class Quick extends Sorts
 {
-    public static void quickSort(int from, int to)
+    public Quick(int size)
+    {
+        super(size);
+    }
+
+    public void quickSort(int from, int to)
     {
         if (from < to)
         {
@@ -9,19 +14,20 @@ public class Quick extends Sorts
             quickSort(p + 1, to);
         }
     }
-    private static int split(int from, int to)
+    
+    private int split(int from, int to)
     {
-        int pivot = values[from];
+        int pivot = getVali(from);
         int first = from;
         int last = to;
         while (first < last)
         {
             first++;
-            while (first < SIZE && values[first] <= pivot)
+            while ((first < getSize()) && (getVali(first) <= pivot))
             {
                 first++;
             }
-            while (values[last] > pivot)
+            while (getVali(last) > pivot)
             {
                 last--;
             }
