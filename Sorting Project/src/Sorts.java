@@ -1,7 +1,4 @@
-import java.io.*;
 import java.util.*;
-
-import java.text.DecimalFormat;
 public class Sorts
 {
     private int[] values;
@@ -25,10 +22,13 @@ public class Sorts
         return true;
     }
 
-    private void initValues()
-    // Initializes the values array with random integers from 0 to 99
+    /*
+     * Initializes the values array with random integers from 0 to 99
+     */
+    public void initValues()
     {
-        Random rand = new Random(560);
+        int randomSeed = (int)Math.random() * 1001;
+        Random rand = new Random(randomSeed);
         for (int index = 0; index < size; index++)
             values[index] = Math.abs(rand.nextInt()) % 100;
     }
@@ -51,6 +51,12 @@ public class Sorts
         size = nextSize;
     }
 
+    public void resizeArray(int newLength)
+    {
+        setSize(newLength);
+        values = new int[newLength];
+    }
+
     public int[] getValues()
     {
         return values;
@@ -65,6 +71,4 @@ public class Sorts
     {
         return values[index];
     }
-
-
 }
