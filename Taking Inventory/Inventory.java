@@ -1,3 +1,4 @@
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class Inventory
@@ -38,6 +39,8 @@ public class Inventory
                 sold = 0;
             }
         }
+
+        out = out += 0.005;
         return out;
     }
 }

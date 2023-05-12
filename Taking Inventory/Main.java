@@ -1,4 +1,5 @@
 import java.math.*;
+import java.text.DecimalFormat;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -21,7 +22,10 @@ public class Main
         Inventory inventory = new Inventory(data);
         System.out.println(inventory);
         System.out.println();
-        System.out.println(inventory.getValueRemaining(count));
+
+        DecimalFormat dc = new DecimalFormat("0.00");
+        double valRemaining = inventory.getValueRemaining(count);
+        System.out.println(dc.format(valRemaining));
     }
 
     // private static void runTest()
