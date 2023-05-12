@@ -1,33 +1,46 @@
 import java.math.*;
 import java.util.Random;
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 
 public class Main
 {
     public static void main(String[] args) {
-    }
-
-    public static class Purchase
-    {
-        private int count;
-        private double price;
-
-        public Purchase(int count, double price)
+        Scanner sc = new Scanner(System.in);
+        int count = sc.nextInt();
+        int purchases = sc.nextInt();
+        ArrayList<Purchase> data = new ArrayList<Purchase>();
+        while (purchases > 0)
         {
-            this.count = count;
-            this.price = price;
+            data.add(new Purchase(sc.nextInt(), sc.nextDouble()));
+            purchases--;
         }
 
-        public int c() {return count;}
-        public double p() {return price;}
+        Inventory inventory = new Inventory(data);
+        System.out.println(inventory);
+        System.out.println();
+        System.out.println(inventory.getValueRemaining(count));
     }
 
-    private static Purchase[] getSample(int entries, int minCount, int maxCount, int minPrice, int maxPrice)
-    {
-        Purchase[] purchases = new Purchase[entries];
-        for (Purchase p : purchases)
-        {
-            p = new Purchase((int) (Math.random() * (maxCount - minCount) + minCount), Math.random() * (maxPrice - minPrice) + minPrice);
-        }
-        return purchases;
-    }
+    // private static void runTest()
+    // {
+    //     ArrayList<Purchase> sampleInput = new ArrayList<Purchase>(Arrays.asList(getSample(10,20, 400, 0.5, 1)));
+    //     Inventory inventory = new Inventory(sampleInput);
+
+    //     System.out.println(inventory);
+    //     System.out.println();
+    //     int count = 200;
+    //     System.out.println(count);
+    //     System.out.println(inventory.getValueRemaining(count));
+    // }
+
+    // private static Purchase[] getSample(int entries, int minCount, int maxCount, double minPrice, double maxPrice) {
+    //     Purchase[] purchases = new Purchase[entries];
+    //     for (int i = 0; i < purchases.length; i++) {
+    //         purchases[i] = new Purchase((int) (Math.random() * (maxCount - minCount) + minCount), Math.random() * (maxPrice - minPrice) + minPrice);
+    //     }
+    //     return purchases;
+    // }
 }
