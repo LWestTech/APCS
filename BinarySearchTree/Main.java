@@ -19,5 +19,14 @@ public class Main {
         tree.insert(8);
 
         tree.display();
+        System.out.println();
+        tree.remove(2);
+        tree.remove(1);
+        tree.remove(1);
+        System.out.println();
+        tree.display();
+
+        System.out.println();
+        System.out.println(tree.search(5));
     }
 }

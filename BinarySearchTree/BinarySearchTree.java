@@ -1,5 +1,7 @@
 import java.lang.Comparable;
 
+import org.w3c.dom.Node;
+
 public class BinarySearchTree<E extends Comparable<? super E>>{
     Node<E> root;
 
@@ -49,10 +51,43 @@ public class BinarySearchTree<E extends Comparable<? super E>>{
         }
     }
 
-    // public void remove(int data) {}
-    // private Node removeHelper(Node root, int data) {return null;}
-    // private int successor(Node root) {return null;}
-    // private int predecessor(Node root) {return null;}
+    public void remove(Comparable<E> data) {
+        if (search(data)) {removeHelper(root, data);}
+        else {System.out.println(data + " could not be found");}
+    }
+    private Node removeHelper(Node root, Comparable<E> data) {
+        if (root == null) {return root;}
+        else if (root.element.compareTo(data) > 0) {
+            root.left = removeHelper(root.left, data);
+        } else if (root.element.compareTo(data) < 0) {
+            root.right = removeHelper(root.right, data);
+        } else { // node found
+            if(root.left == null && root.right == null) {
+                root = null;
+            } else if (root.right != null) {
+                root.element = successor(root);
+                root.right = removeHelper(root.right, data);
+            } else {
+                root.element = predecessor(root);
+                root.left = removeHelper(root.left, data);
+            }
+        }
+        return root;
+    }
+    private Comparable<E> successor(Node root) { // Find least value child
+        root = root.right;
+        while(root.left != null) {
+            root = root.left;
+        }
+        return root.element;
+    }
+    private Comparable<E> predecessor(Node root) { // Find greatest value child
+        root = root.left;
+        while(root.right != null) {
+            root = root.right;
+        }
+        return root.element;
+    }
 
     private static class Node<E> {
         Comparable<E> element;
